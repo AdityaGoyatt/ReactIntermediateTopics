@@ -1,22 +1,10 @@
-import axios from "axios";
-import { useQuery } from "@tanstack/react-query";
-interface Todo {
-  id: number;
-  title: string;
-  userId: number;
-  completed: boolean;
-}
+import useCustomQuery from "./useCustomQuery";
 
 const TodoList = () => {
-  const fetchTodoList = () =>
-    axios
-      .get<Todo[]>("https://jsonplaceholder.typicode.com/todos")
-      .then((res) => res.data);
+  const { data: todos, error, isLoading } = useCustomQuery();
 
-  const { data: todos } = useQuery({
-    queryKey: ["todos"],
-    queryFn: fetchTodoList,
-  });
+  if (error) return <p>{error.message}</p>;
+  if (isLoading) return <p>is Loading</p>;
 
   return (
     <ul className="list-group">
