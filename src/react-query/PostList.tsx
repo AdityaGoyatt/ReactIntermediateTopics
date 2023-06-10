@@ -1,5 +1,6 @@
-import axios from 'axios';
-import { useEffect, useState } from 'react';
+import axios from "axios";
+import { useEffect, useState } from "react";
+import usePostQuery from "./usePostQuery";
 
 interface Post {
   id: number;
@@ -9,21 +10,12 @@ interface Post {
 }
 
 const PostList = () => {
-  const [posts, setPosts] = useState<Post[]>([]);
-  const [error, setError] = useState('');
-
-  useEffect(() => {
-    axios
-      .get('https://jsonplaceholder.typicode.com/posts')
-      .then((res) => setPosts(res.data))
-      .catch((error) => setError(error));
-  }, []);
-
-  if (error) return <p>{error}</p>;
+  const { data: posts, error, isLoading } = usePostQuery();
+  if (error) return <p>{error.message}</p>;
 
   return (
     <ul className="list-group">
-      {posts.map((post) => (
+      {posts?.map((post) => (
         <li key={post.id} className="list-group-item">
           {post.title}
         </li>
