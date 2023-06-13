@@ -2,37 +2,36 @@ import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import usePostQuery from "./usePostQuery";
 
-interface Post {
-  id: number;
-  title: string;
-  body: string;
-  userId: number;
-}
-
 const PostList = () => {
-  const [userId, setUserId] = useState<number>();
-  const { data: posts, error, isLoading } = usePostQuery(userId);
+  const pageSize = 10;
+  const {
+    data: posts,
+    error,
+    isLoading,
+    fetchNextPage,
+    isFetching,
+  } = usePostQuery({ pageSize });
   if (error) return <p>{error.message}</p>;
 
   return (
     <>
-      <select
-        onChange={(event) => setUserId(parseInt(event.target.value))}
-        className="form-select mb-3"
-      >
-        <option value=""></option>
-        <option value="1">User 1</option>
-        <option value="2">User 2</option>
-        <option value="3">User 3</option>
-      </select>
-
-      <ul className="list-group">
-        {posts?.map((post) => (
-          <li key={post.id} className="list-group-item">
-            {post.title}
-          </li>
-        ))}
+      <ul className="list-group mb-4">
+        {posts?.pages.map((data) =>
+          data.map((post) => (
+            <li key={post.id} className="list-group-item">
+              {post.title}
+            </li>
+          ))
+        )}
       </ul>
+
+      <button
+        onClick={() => fetchNextPage()}
+        disabled={isFetching}
+        className="btn btn-primary ms-3"
+      >
+        {isFetching ? "loading..." : "load more"}
+      </button>
     </>
   );
 };

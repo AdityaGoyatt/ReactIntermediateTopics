@@ -6,11 +6,11 @@ import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import App from "./App";
 import "./index.css";
 
-const queryCLient = new QueryClient();
+const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <QueryClientProvider client={queryCLient}>
+    <QueryClientProvider client={queryClient}>
       <App />
       <ReactQueryDevtools />
     </QueryClientProvider>
