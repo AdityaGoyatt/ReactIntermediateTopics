@@ -1,5 +1,9 @@
-import { useReducer, useState } from "react";
+import { useContext, useReducer, useState } from "react";
 import taskReducer from "./reducers/TaskReducer";
+import taskContext from "./contexts/taskContext";
+import AuthContext from "./contexts/AuthContext";
+import { useTask } from "./hooks/useTasks";
+import { useAuth } from "./hooks/useAuth";
 
 export interface Task {
   id: number;
@@ -7,13 +11,14 @@ export interface Task {
 }
 
 const TaskList = () => {
-  const [tasks, despatch] = useReducer(taskReducer, [] as Task[]);
-
+  const { tasks, dispatch } = useTask();
+  const { user: currentUser } = useAuth();
   return (
     <>
+      {currentUser !== "" ? <p>user: {currentUser}</p> : <></>}
       <button
         onClick={() =>
-          despatch({
+          dispatch({
             type: "Add",
             task: { id: Date.now(), title: "Task " + Date.now() },
           })
@@ -31,7 +36,7 @@ const TaskList = () => {
             <span className="flex-grow-1">{task.title}</span>
             <button
               className="btn btn-outline-danger"
-              onClick={() => despatch({ type: "Delete", taskId: task.id })}
+              onClick={() => dispatch({ type: "Delete", taskId: task.id })}
             >
               Delete
             </button>

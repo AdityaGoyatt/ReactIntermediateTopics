@@ -6,7 +6,7 @@ interface actionLogout {
   type: "Logout";
 }
 
-type action = actionLogin | actionLogout;
+export type action = actionLogin | actionLogout;
 
 const useReducer = (userName: string, action: action): string => {
   if (action.type === "Login") return action.name;
