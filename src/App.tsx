@@ -1,9 +1,8 @@
-import { useReducer } from "react";
 import "./App.css";
 import NavBar from "./state-management/NavBar";
 import HomePage from "./state-management/HomePage";
 import TaskProvider from "./state-management/Tasks";
-import AuthProvider from "./state-management/AuthProvider";
+import AuthProvider from "./state-management/Users";
 const App = () => {
   return (
     <TaskProvider>
