@@ -1,6 +1,6 @@
 import React from "react";
-import { Task } from "../TaskList";
-import { action } from "../reducers/TaskReducer";
+import { Task } from "./TaskList";
+import { action } from "./TaskReducer";
 
 interface taskContextBox {
   tasks: Task[];

@@ -1,4 +1,4 @@
-import { Task } from "../TaskList";
+import { Task } from "./TaskList";
 
 interface AddTaskAction {
   type: "Add";
