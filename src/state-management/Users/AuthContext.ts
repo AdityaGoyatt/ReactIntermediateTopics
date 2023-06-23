@@ -1,5 +1,5 @@
 import React from "react";
-import { action } from "../reducers/userReducer";
+import { action } from "./AuthProvider";
 
 interface userContextBox {
   user: string;

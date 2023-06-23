@@ -1,5 +1,5 @@
 import { useTask } from "./useTasks";
-import { useAuth } from "../hooks/useAuth";
+import { useAuth } from "../Users/useAuth";
 
 export interface Task {
   id: number;
