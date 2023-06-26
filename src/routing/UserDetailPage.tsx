@@ -7,8 +7,6 @@ import {
 import useAuth from "./hooks/useAuth";
 
 const UserDetailPage = () => {
-  const { user } = useAuth();
-  if (!user) return <Navigate to="/login" />;
   const param = useParams();
   const [searchParams, setSearchparams] = useSearchParams();
   const location = useLocation();
